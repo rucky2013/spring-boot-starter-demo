@@ -6,8 +6,6 @@ package com.wanda.common;
  */
 public class Constants {
 
-    public static final String LINE_PATH = "line.log";
-
     public static final String EMPTY_STRING = "";
 
     public static final String MESSAGE_NORMAL = "0";

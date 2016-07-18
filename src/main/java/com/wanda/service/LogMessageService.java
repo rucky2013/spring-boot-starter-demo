@@ -56,15 +56,15 @@ public class LogMessageService {
         return 0;
     }
 
-    public int getMessageLine(String linePath) throws Exception{
-        BufferedReader dis = new BufferedReader(new FileReader(linePath));
+    public int getMessageLine(String path) throws Exception{
+        BufferedReader dis = new BufferedReader(new InputStreamReader(new FileInputStream(path)));
         int i = Integer.valueOf(dis.readLine());
         dis.close();
         return i;
     }
 
-    public void setMessageLine(int messageLine, String linePath) throws Exception {
-        BufferedWriter dos = new BufferedWriter(new FileWriter(linePath));
+    public void setMessageLine(int messageLine,  String path) throws Exception {
+        BufferedWriter dos = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(path)));
         dos.write(String.valueOf(messageLine));
         dos.close();
     }

@@ -13,6 +13,15 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 public class Config {
     private String logPath;
+    private String linePath;
+
+    public String getLinePath() {
+        return linePath;
+    }
+
+    public void setLinePath(String linePath) {
+        this.linePath = linePath;
+    }
 
     public String getLogPath() {
         return logPath;
