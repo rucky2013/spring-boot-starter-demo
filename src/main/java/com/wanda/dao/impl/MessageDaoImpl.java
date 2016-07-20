@@ -35,7 +35,7 @@ public class MessageDaoImpl implements MessageDao {
     public Boolean saveMessages(List<Message> storeMessage, String status) {
         try {
             final List<Message> mlist = storeMessage;
-            String sql = "insert into rawdata_c(time, unixTime, plaza, floor, xCoordinate,yCoordinate ,mac, status)" +
+            String sql = "insert into rawdata_d(time, unixTime, plaza, floor, xCoordinate,yCoordinate ,mac, status)" +
                     " values(?,?,?,?,?,?,?,?)";
             jdbcTemplate.batchUpdate(sql, new BatchPreparedStatementSetter() {
                 @Override
