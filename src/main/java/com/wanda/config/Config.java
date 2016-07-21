@@ -14,6 +14,15 @@ import org.springframework.context.annotation.Configuration;
 public class Config {
     private String logPath;
     private String linePath;
+    private String table;
+
+    public String getTable() {
+        return table;
+    }
+
+    public void setTable(String table) {
+        this.table = table;
+    }
 
     public String getLinePath() {
         return linePath;

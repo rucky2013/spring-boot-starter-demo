@@ -3,6 +3,7 @@ package com.wanda.dao.impl;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.wanda.bean.Message;
 import com.wanda.common.SystemException;
+import com.wanda.config.Config;
 import com.wanda.dao.MessageDao;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -30,25 +31,29 @@ public class MessageDaoImpl implements MessageDao {
     @Autowired
     protected JdbcTemplate jdbcTemplate;
 
+    @Autowired
+    private Config config;
+
 
     @Override
     public Boolean saveMessages(List<Message> storeMessage, String status) {
         try {
             final List<Message> mlist = storeMessage;
-            String sql = "insert into rawdata_d(time, unixTime, plaza, floor, xCoordinate,yCoordinate ,mac, status)" +
+            String sql = "insert into rawdata(time, mac,unixTime, plaza, floor, xCoordinate,yCoordinate , status)" +
                     " values(?,?,?,?,?,?,?,?)";
             jdbcTemplate.batchUpdate(sql, new BatchPreparedStatementSetter() {
                 @Override
                 public void setValues(PreparedStatement preparedStatement, int i) throws SQLException {
                     preparedStatement.setTimestamp(1, new Timestamp(mlist.get(i).getTime() * 1000L));
-                    preparedStatement.setInt(2, mlist.get(i).getTime());
-                    preparedStatement.setString(3, mlist.get(i).getPlaza());
-                    preparedStatement.setString(4, mlist.get(i).getFloor());
-                    preparedStatement.setString(5, mlist.get(i).getX());
-                    preparedStatement.setString(6, mlist.get(i).getY());
-                    preparedStatement.setString(7, mlist.get(i).getMac());
+                    preparedStatement.setString(2, mlist.get(i).getMac());
+                    preparedStatement.setInt(3, mlist.get(i).getTime());
+                    preparedStatement.setString(4, mlist.get(i).getPlaza());
+                    preparedStatement.setString(5, mlist.get(i).getFloor());
+                    preparedStatement.setString(6, mlist.get(i).getX());
+                    preparedStatement.setString(7, mlist.get(i).getY());
                     preparedStatement.setString(8, status);
                 }
+
                 @Override
                 public int getBatchSize() {
                     return mlist.size();
